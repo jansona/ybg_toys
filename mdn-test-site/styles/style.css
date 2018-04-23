@@ -1,0 +1,33 @@
+body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.sender-column {
+  text-align: right;
+}
+
+h1 {
+  font-size: 1.5em;
+  text-align: left;
+}
+
+h2 {
+  font-size: 1.3em;
+  text-align: left;
+}
+
+p,ul,ol,dl,address {
+  font-size: 1.1em;
+}
+
+p, li, dd, dt, address {
+  line-height: 1.5;
+  text-align: left;
+  /*background-image: url("https://raw.githubusercontent.com/mdn/learning-area/master/html/multimedia-and-embedding/images-in-html/dinosaur_small.jpg");*/
+}
+
+
+.receiver-column{
+	text-align: left;
+}
