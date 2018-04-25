@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
 import random
+import os
 from fractions import Fraction
 
 
@@ -116,13 +117,15 @@ def InputShadow(aline):
             temp = ""
             noDigit = True
         i += 1
+    if len(temp) != 0:
+        shadow.append(int(temp))
     return (int(id), shadow)
     
 
 def Decompose():
     secret = str(input("Please tell me your secret:\t"))
-    least = input("The least keys to rebuild the secret:\t")
-    total = input("How many keys you want to share(this number must be bigger than the last one):\t")
+    least = int(input("The least keys to rebuild the secret:\t"))
+    total = int(input("How many keys you want to share(this number must be bigger than the last one):\t"))
     ShadowsAndPrime = Secret2Shadows(secret, least, total)
     OutputShadows(ShadowsAndPrime)
 
@@ -149,23 +152,32 @@ def Rebuild():
     id = 0
     shadows = []
     print("Prime:", end='\t')
-    prime = input()
-    least = input("How many shadows you gonna input:\t")
+    prime = int(input())
+    least = int(input("How many shadows you gonna input:\t"))
     for i in range(0, least):
         print("Please:", end='\t')
-        aline = raw_input()
+        try:
+            aline = input()
+            print(aline)
+        except Exception as err:
+            print(err)
+            os.system('pause')
         OneShadow = InputShadow(aline)
         ids.append(OneShadow[0])
         shadows.append(OneShadow[-1])
-    ans = Shadows2Secret(ids, shadows, prime)
-    print(ans)
+    try:
+        ans = Shadows2Secret(ids, shadows, prime)
+    except Exception as err:
+        print(err)
+        os.system('pause')
+    print(str(int(float(ans))))
 
 def ShadowsInit():
     print("Easter egg HAHAHAHAH,")
     print("WARNING DANGEROUS")
     secret = str(input("Please tell me your secret:\t"))
-    least = input("The least keys to rebuild the secret:\t")
-    total = input("How many keys you want to share(this number must be bigger than the last one):\t")
+    least = int(input("The least keys to rebuild the secret:\t"))
+    total = int(input("How many keys you want to share(this number must be bigger than the last one):\t"))
     ShadowsAndPrime = Secret2Shadows(secret, least, total)
     f = open(".\\ShadowsFile.txt", 'w')
     f.write("Prime:\t" + str(ShadowsAndPrime[-1]))
@@ -180,7 +192,6 @@ def ShadowsInit():
     f.close()
 
 
-
 control = "d"
 while(True):
     # print("我给你讲，你要是Secret分解为Shadows按 d ,")
@@ -189,7 +200,12 @@ while(True):
     print("""Press 1 to decompose the secret into shadows, 
 press 2 to rebuild the secret from shadows 
 and press anything else if you wanna quit.""")
-    control = input()
+    try:
+        control = int(input())
+    except:
+        print("except a digital input but got a str")
+        os.system('pause')
+        os.system('exit')
     if control == 1 or control == "D":
         Decompose()
     elif control == 2 or control == "R":
