@@ -165,11 +165,11 @@ def Rebuild():
         OneShadow = InputShadow(aline)
         ids.append(OneShadow[0])
         shadows.append(OneShadow[-1])
-    try:
-        ans = Shadows2Secret(ids, shadows, prime)
-    except Exception as err:
-        print(err)
-        os.system('pause')
+    # try:
+    ans = Shadows2Secret(ids, shadows, prime)
+    # except Exception as err:
+    # print(err)
+    os.system('pause')
     print(str(int(float(ans))))
 
 def ShadowsInit():
