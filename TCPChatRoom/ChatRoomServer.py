@@ -49,30 +49,12 @@ def messageParser(senderSock, senderName):
 			senderSock.send(bytes(str(l), 'utf-8'))
 			continue
 
-		# if senderName in name2sock.keys():
-		# 	if senderSock in send2recv.keys():
-		# 		send2recv[senderSock].send('%s' % data)
-		# 	elif re.match('^To:.+', data) is not None:
-		# 		data = data[3:]
-		# 		if name2sock[data] in send2recv.keys():
-		# 			print('he has already had a partner')
-		# 			continue
-		# 		send2recv[senderSock] = name2sock[data]
-		# 		send2recv[name2sock[data]] = senderSock
-		# 		print('connection between %s and %s completed' % (senderName, data))
-		# 	elif data == 'init0':
-		# 		shutoffServer()
-		# 	else:
-		# 		print("don't understand")
-		# elif data == 'init0':
-		# 	shutoffServer()
-		# else:
-
 		if re.match('^To:.+', data) is not None:
 			data = data[3:]
 			if data in name2sock.keys():
 				if data == senderName:
 					senderSock.send(bytes("禁止与自己建立联系", 'utf-8'))
+					continue
 				if name2sock[data] not in send2recv.keys():
 					if senderSock in send2recv.keys():
 						del send2recv[send2recv[senderSock]]
@@ -85,7 +67,8 @@ def messageParser(senderSock, senderName):
 					print('match complete')
 				else:
 					print("There's already been a connection")
-					senderSock.send(bytes('有第三者呼叫你', 'utf-8'))
+					name2sock[data].send(bytes('有第三者呼叫你', 'utf-8'))
+					senderSock.send(bytes('对方已与他人建立来连接', 'utf-8'))
 			else:
 				senderSock.send(bytes('查无此用户，键入指令 “--list” 可查看当前所有用户', 'utf-8'))
 				print("There's no such a person")
