@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.staticfile.org/angular.js/1.4.6/angular.min.js"></script>
+    <script src="https://cdn.bootcss.com/angular.js/1.7.0/angular-route.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>HomePage</title>
+</head>
+<body ng-app="myApp">
+<!--<div ng-controller="showAll" class="panel panel-default">-->
+<!--<button class="btn" ng-click="all()" disabled>所有成员</button>-->
+<!--<div class="panel-body">-->
+<!--<table class="table table-striped">-->
+<!--<tr ng-repeat="x in persons">-->
+<!--<td>{{ x.id }}</td>-->
+<!--<td>{{ x.name }}</td>-->
+<!--<td>{{ x.email }}</td>-->
+<!--</tr>-->
+<!--</table>-->
+<!--</div>-->
+<!--</div>-->
+
+<div ng-controller="create" class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">新建</h3>
+    </div>
+    <div class="panel-body">
+        <div class="input-group">
+            <span><input type="text" ng-model="name" class="form-control" placeholder="请输入姓名"></span>
+            <span><input type="text" ng-model="email" class="form-control" placeholder="请输入电子邮箱"></span>
+            <span><button ng-click="add()" class="btn btn-primary">添加</button></span>
+        </div>
+    </div>
+    <p class="text-success">{{result}}</p>
+</div>
+
+<div ng-controller="queryAll" class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">查询</h3>
+    </div>
+    <span>
+            <input type="text" ng-model="keyword">
+            <select ng-init="selectedItem=methods[0]" ng-model="selectedItem" ng-options="x for x in methods"></select>
+        </span>
+    <button class="btn" ng-click="query()">查询</button>
+    <div class="panel-body">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>e-mail</th>
+            </tr>
+            </thead>
+            <tr ng-repeat="x in persons | orderBy:'id'">
+                <td>{{ x.id }}</td>
+                <td>{{ x.name }}</td>
+                <td>{{ x.email }}</td>
+                <td>
+                    <button ng-click="delete(x.id)" class="close">delete</button>
+                </td>
+
+                <td>
+                    <button class="btn" data-target="#updateModal" ng-click="update(x.id)">update</button>
+                </td>
+                <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="更新"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel">模态框（Modal）标题</h4>
+                            </div>
+                            <div class="modal-body">
+                                <input type="text" ng-model="newName">
+                                <input type="text" ng-model="newEmail">
+                                <button ng-click="submit()">CLICK</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<script src="controller.js"></script>
+</body>
+</html>
