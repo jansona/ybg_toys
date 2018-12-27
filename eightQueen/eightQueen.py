@@ -34,7 +34,7 @@ if __name__ == "__main__":
 	leftQueen -= 1
 	# print(stack_0.items[0])
 	adjust = False
-	while(leftQueen != 0):
+	while leftQueen != 0:
 		# print("Left Queen is ", leftQueen)
 		# print(stack_0.items)
 		if adjust:
