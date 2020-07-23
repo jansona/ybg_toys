@@ -82,8 +82,8 @@ fn send_mail(socket: &mut TcpStream, mail: Mail) {
 
 fn main() -> std::io::Result<()> {
 
-    let login = "ale_li_pona@163.com";
-    let password = "ybg19970203ybg";
+    let login = "";
+    let password = "";
 
     let mut stream = TcpStream::connect("smtp.163.com:25")?;
     get_response(&mut stream);

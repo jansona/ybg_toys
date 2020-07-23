@@ -79,8 +79,8 @@ fn get_a_mail(socket: &mut TcpStream, index: usize) -> String {
 
 fn main() -> std::io::Result<()> {
     
-    let login = "ale_li_pona@163.com";
-    let password = "ybg19970203ybg";
+    let login = "";
+    let password = "";
     
     let mut index = 0;
     
